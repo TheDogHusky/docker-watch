@@ -1,0 +1,18 @@
+{
+    "name": "docker-watch",
+    "version": "0.1.0",
+    "description": "Watch for container changes and execute a command",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": {
+        "name": "Adam Billard",
+        "email": "contact@classydev.fr"
+    },
+    "dependencies": {
+        "dockerode": "^4.0.4"
+    },
+    "packageManager": "yarn@1.22.22"
+}
