@@ -1,0 +1,11 @@
+{
+  "name": "@docker-watch/cli",
+  "version": "1.0.0",
+  "description": "CLI for docker-watch",
+  "main": "lib/index",
+  "author": "Adam Billard",
+  "license": "MIT",
+  "scripts": {
+    "start": "node lib/index.js"
+  }
+}

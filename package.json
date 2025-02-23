@@ -4,15 +4,19 @@
     "description": "Watch for container changes and execute a command",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js"
+        "start:cli": "yarn workspace @docker-watch/cli start"
     },
-    "author": {
-        "name": "Adam Billard",
-        "email": "contact@classydev.fr"
-    },
+    "author": "Adam Billard <contact@classydev.fr>",
     "dependencies": {
         "dockerode": "^4.0.4"
     },
-    "packageManager": "yarn@1.22.22"
+    "packageManager": "yarn@1.22.22",
+    "repository": "https://github.com/TheDogHusky/docker-watch.git",
+    "license": "MIT",
+    "private": true,
+    "workspaces": [
+        "packages/cli",
+        "packages/core",
+        "packages/runner"
+    ]
 }
