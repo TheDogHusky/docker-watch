@@ -4,19 +4,21 @@
     "description": "Watch for container changes and execute a command",
     "main": "index.js",
     "scripts": {
-        "start:cli": "yarn workspace @docker-watch/cli start"
+        "start:cli": "yarn workspace @docker-watch/cli start",
+        "test:core": "yarn workspace @docker-watch/core test",
+        "build": "yarn workspaces foreach run build",
+        "format": "prettier --write ."
     },
     "author": "Adam Billard <contact@classydev.fr>",
-    "dependencies": {
-        "dockerode": "^4.0.4"
-    },
     "packageManager": "yarn@1.22.22",
     "repository": "https://github.com/TheDogHusky/docker-watch.git",
     "license": "MIT",
     "private": true,
     "workspaces": [
-        "packages/cli",
-        "packages/core",
-        "packages/runner"
-    ]
+        "packages/*"
+    ],
+    "devDependencies": {
+        "prettier": "^3.5.2",
+        "typescript": "^5.7.3"
+    }
 }

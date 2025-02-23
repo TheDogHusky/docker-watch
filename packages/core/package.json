@@ -1,0 +1,20 @@
+{
+  "name": "@docker-watch/core",
+  "version": "1.0.0",
+  "description": "Core logic for docker-watch",
+  "main": "lib/index",
+  "author": "Adam Billard",
+  "license": "MIT",
+  "scripts": {
+    "test": "tsc && node lib/index",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "dockerode": "^4.0.4",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/dockerode": "^3.3.34",
+    "typed-emitter": "^2.1.0"
+  }
+}
