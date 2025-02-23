@@ -6,8 +6,8 @@
     "scripts": {
         "start:cli": "yarn workspace @docker-watch/cli start",
         "test:core": "yarn workspace @docker-watch/core test",
-        "build": "yarn workspaces foreach run build",
-        "format": "prettier --write ."
+        "build": "yarn workspaces run build",
+        "format": "yarn workspaces run prettier --write src//**/*.{ts}"
     },
     "author": "Adam Billard <contact@classydev.fr>",
     "packageManager": "yarn@1.22.22",
