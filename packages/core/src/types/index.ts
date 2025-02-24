@@ -24,7 +24,7 @@ export interface Config {
 	 * Default: /var/run/docker.sock
 	 * For now, only Unix sockets are supported. We do not support TCP sockets.
 	 */
-	socket_path: string;
+	socket_path?: string;
 
 	/**
 	 * The global conditions for the watcher
@@ -132,4 +132,5 @@ export type Events = {
 	unpause: (data: any) => void;
 	update: (data: any) => void;
 	error: (err: Error) => void;
+	[event: string]: (data: any) => void;
 };

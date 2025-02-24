@@ -10,6 +10,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "consola": "^3.4.0",
     "dockerode": "^4.0.4",
     "yaml": "^2.7.0"
   },

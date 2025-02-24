@@ -1,3 +1,4 @@
 export * from "./types";
-export * from "./structures/dockerwatch";
+export { default as DockerWatch } from "./structures/dockerwatch";
+export * from "./structures/logger";
 export * from "./utils/functions";

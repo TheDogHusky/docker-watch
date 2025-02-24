@@ -5,8 +5,14 @@
     "main": "index.js",
     "scripts": {
         "start:cli": "yarn workspace @docker-watch/cli start",
+        "test": "yarn workspaces run test",
         "test:core": "yarn workspace @docker-watch/core test",
+        "test:cli": "yarn workspace @docker-watch/cli test",
+        "test:runner": "yarn workspace @docker-watch/runner test",
         "build": "yarn workspaces run build",
+        "build:core": "yarn workspace @docker-watch/core build",
+        "build:cli": "yarn workspace @docker-watch/cli build",
+        "build:runner": "yarn workspace @docker-watch/runner build",
         "format": "yarn workspaces run prettier --write src//**/*.{ts}"
     },
     "author": "Adam Billard <contact@classydev.fr>",

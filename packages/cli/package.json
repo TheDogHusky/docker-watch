@@ -6,6 +6,11 @@
   "author": "Adam Billard",
   "license": "MIT",
   "scripts": {
-    "start": "node lib/index.js"
+    "start": "npm run build && node lib/index.js",
+    "test": "npm run build && node lib/index.js -d -o \"start\" -C \"echo Hello World\"",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "commander": "^13.1.0"
   }
 }
