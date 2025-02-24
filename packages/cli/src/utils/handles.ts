@@ -18,11 +18,11 @@ export async function handleWithOptions(options: OptionValues) {
 	const config: Config = {
 		events: options.on.split(", ").map((event: string) => {
 			return {
-				name: event.trim()
-			}
+				name: event.trim(),
+			};
 		}),
-		global_command: options.command
-	}
+		global_command: options.command,
+	};
 
 	return new DockerWatch(config);
 }

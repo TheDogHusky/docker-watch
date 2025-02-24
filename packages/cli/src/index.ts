@@ -8,9 +8,14 @@ program.version(packageJson.version);
 
 program
 	.name("docker-watch")
-	.description("CLI tool for Docker-Watch. Allows you to watch for docker container events and run commands accordingly.")
+	.description(
+		"CLI tool for Docker-Watch. Allows you to watch for docker container events and run commands accordingly.",
+	)
 	.option("-d, --debug", "output extra debugging")
-	.option("-c, --config <path>", "set config path. defaults to ./docker-watch.yml. If no config file is found, the default values will be used.")
+	.option(
+		"-c, --config <path>",
+		"set config path. defaults to ./docker-watch.yml. If no config file is found, the default values will be used.",
+	)
 	.option("-s, --silent", "disable all output")
 	.option("-o, --on <events>", "listen for events")
 	.option("-C, --command <command>", "command to run when event is triggered")
@@ -63,7 +68,7 @@ if (options.silent) {
 		}
 
 		// Listen for events
-		dockerWatch.config.events.forEach(event => {
+		dockerWatch.config.events.forEach((event) => {
 			logger.debug(`Adding listener for event ${event.name}`);
 			dockerWatch?.on(event.name, handleEvent);
 		});
@@ -72,14 +77,14 @@ if (options.silent) {
 		process.exit(1);
 	}
 
-	["SIGINT", "SIGTERM"].forEach(signal => {
+	["SIGINT", "SIGTERM"].forEach((signal) => {
 		process.on(signal, () => {
 			logger.info(`Received ${signal}, exiting...`);
 			// If possible, gracefully exit docker-watch
 			process.exit(0); // for now, just exit
 		});
 	});
-})().catch(err => {
+})().catch((err) => {
 	logger.error("Error while starting Docker-Watch CLI", err);
 	process.exit(1);
 });

@@ -6,7 +6,7 @@ import { consola, ConsolaOptions } from "consola";
  * @param options The options to use for the logger (ConsolaOptions)
  */
 export function getLogger(tag?: string, options: Partial<ConsolaOptions> = {}) {
-  	return tag ? consola.create(options).withTag(tag) : consola;
+	return tag ? consola.create(options).withTag(tag) : consola;
 }
 
 /**
@@ -14,6 +14,6 @@ export function getLogger(tag?: string, options: Partial<ConsolaOptions> = {}) {
  */
 export function getDefaultLogger() {
 	return getLogger("docker-watch", {
-		level: process.env.DEBUG ? 4 : 3
+		level: process.env.DEBUG ? 4 : 3,
 	});
 }
