@@ -7,6 +7,6 @@ import { Config } from "../types";
  * @param path The path to the configuration file
  */
 export async function parseConfig(path: string): Promise<Config> {
-	const file = readFileSync(path, "utf8");
-	return parse(file);
+    const file = readFileSync(path, "utf8");
+    return parse(file);
 }

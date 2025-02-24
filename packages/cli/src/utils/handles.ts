@@ -7,7 +7,7 @@ import { logger } from "./constants";
  * @param config
  */
 export async function handleWithConfig(config: Promise<Config>) {
-	return new DockerWatch(await config);
+    return new DockerWatch(await config);
 }
 
 /**
@@ -15,18 +15,18 @@ export async function handleWithConfig(config: Promise<Config>) {
  * @param options
  */
 export async function handleWithOptions(options: OptionValues) {
-	const config: Config = {
-		events: options.on.split(", ").map((event: string) => {
-			return {
-				name: event.trim(),
-			};
-		}),
-		global_command: options.command,
-	};
+    const config: Config = {
+        events: options.on.split(", ").map((event: string) => {
+            return {
+                name: event.trim(),
+            };
+        }),
+        global_command: options.command,
+    };
 
-	return new DockerWatch(config);
+    return new DockerWatch(config);
 }
 
 export async function handleEvent(data: any) {
-	logger.debug(`Event: ${data}`);
+    logger.debug(`Event: ${data}`);
 }
