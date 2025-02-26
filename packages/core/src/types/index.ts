@@ -92,7 +92,11 @@ export interface Config {
  */
 export type HookCode<T extends "before" | "after"> = T extends "before"
     ? (dockerWatch: DockerWatch, eventData: any) => Promise<void>
-    : (dockerWatch: DockerWatch, eventData: any, postRunData: PostEventRunData) => Promise<void>;
+    : (
+          dockerWatch: DockerWatch,
+          eventData: any,
+          postRunData: PostEventRunData,
+      ) => Promise<void>;
 
 /**
  * A hook to run before or after an event

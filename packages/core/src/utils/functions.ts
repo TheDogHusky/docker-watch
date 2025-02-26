@@ -17,7 +17,9 @@ export async function parseConfig(path: string): Promise<Config> {
  * @param command The command to execute
  * @returns The stdout and stderr from the command, alongside an error if there is one
  */
-export async function execute(command: string): Promise<{ stdout: string; stderr: string, error?: Error }> {
+export async function execute(
+    command: string,
+): Promise<{ stdout: string; stderr: string; error?: Error }> {
     return new Promise((resolve) => {
         exec(command, (err, stdout, stderr) => {
             if (err) {

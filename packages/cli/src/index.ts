@@ -67,27 +67,6 @@ if (options.silent) {
             throw new Error("Docker-Watch is not defined");
         }
 
-        dockerWatch.config.hooks = [
-            ...dockerWatch.config.hooks || [],
-            {
-                type: "before",
-                event: "start",
-                code: async (dockerWatch: DockerWatch, data: any) => {
-                    logger.info("Before start event");
-                    return;
-                }
-            },
-            {
-                type: "after",
-                event: "start",
-                code: async (dockerWatch, eventData, postRunData) => {
-                    logger.info("After start event");
-                    logger.debug("Post run data", postRunData);
-                    return;
-                }
-            }
-        ];
-
         // Let the fun begin!
         logger.debug("Listening for Docker events...");
         await dockerWatch.initialize();

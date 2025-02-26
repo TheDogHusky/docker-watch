@@ -39,17 +39,25 @@ export default class DockerWatch extends DockerWatchBase {
     public async initialize() {
         this.config.events.forEach((event) => {
             // Get the hooks for this event
-            const hooks = this.config.hooks?.filter((hook) => hook.event === event.name);
+            const hooks = this.config.hooks?.filter(
+                (hook) => hook.event === event.name,
+            );
             // Get the pre- and post-hooks
-            const preHooks = hooks?.filter((hook): hook is Hook<"before"> => hook.type === "before");
-            const postHooks = hooks?.filter((hook): hook is Hook<"after"> => hook.type === "after");
+            const preHooks = hooks?.filter(
+                (hook): hook is Hook<"before"> => hook.type === "before",
+            );
+            const postHooks = hooks?.filter(
+                (hook): hook is Hook<"after"> => hook.type === "after",
+            );
 
             // Listen for the event
             this.on(event.name, async (data) => {
                 // Run the pre-hooks
                 if (preHooks) {
                     for (const hook of preHooks) {
-                        await hook.code(this, data).catch((e: Error) => this.emit("error", e));
+                        await hook
+                            .code(this, data)
+                            .catch((e: Error) => this.emit("error", e));
                     }
                 }
 
@@ -68,7 +76,9 @@ export default class DockerWatch extends DockerWatchBase {
                 // Run the post-hooks
                 if (postHooks) {
                     for (const hook of postHooks) {
-                        await hook.code(this, data, result).catch((e: Error) => this.emit("error", e));
+                        await hook
+                            .code(this, data, result)
+                            .catch((e: Error) => this.emit("error", e));
                     }
                 }
             });
