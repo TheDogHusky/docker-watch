@@ -1,3 +1,5 @@
+import DockerWatch from "../structures/dockerwatch";
+
 /**
  * The configuration for the container (config.yml)
  */
@@ -43,6 +45,89 @@ export interface Config {
      * ```
      */
     global_conditions?: Conditions;
+
+    /**
+     * Pieces of javascript code to run before or after an event
+     * @example
+     * ```typescript
+     * import { DockerWatch, Config } from "@docker-watch/core";
+     *
+     * const config: Config = {
+     *     global_command: "echo 'Event triggered'",
+     *     events: [
+     *         {
+     *             name: "start",
+     *             command: "echo 'Container started'"
+     *         }
+     *     ],
+     *     hooks: [
+     *         {
+     *             type: "before",
+     *             event: "start",
+     *             code: async (dockerWatch, data) => {
+     *                 console.log("Before start event");
+     *                 // If you want to go to the next hook (if there is one) as hooks and main events are executed just with await/async calls.
+     *                 return;
+     *             }
+     *         },
+     *         {
+     *             type: "after",
+     *             event: "start",
+     *             code: async (dockerWatch, eventData, postRunData) => {
+     *                 // postRunData is an object that contains some extra data from the event run (such as command stdout, stderr, etc.)
+     *                 console.log("After start event", postRunData);
+     *                 return;
+     *             }
+     *         }
+     *     ]
+     * };
+     * const watcher = new DockerWatch(config);
+     * ```
+     */
+    hooks?: Hook<"before" | "after">[];
+}
+
+/**
+ * The code for the hook
+ */
+export type HookCode<T extends "before" | "after"> = T extends "before"
+    ? (dockerWatch: DockerWatch, eventData: any) => Promise<void>
+    : (dockerWatch: DockerWatch, eventData: any, postRunData: PostEventRunData) => Promise<void>;
+
+/**
+ * A hook to run before or after an event
+ */
+export interface Hook<T extends "before" | "after"> {
+    /**
+     * The type of the hook, either "before" or "after"
+     */
+    type: T;
+    /**
+     * The event name to run the hook on
+     */
+    event: string;
+    /**
+     * Callback to run
+     */
+    code: HookCode<T>;
+}
+
+/**
+ * The data from the event run
+ */
+export interface PostEventRunData {
+    /**
+     * The stdout from the command execution
+     */
+    stdout: string;
+    /**
+     * The stderr from the command execution
+     */
+    stderr: string;
+    /**
+     * The error from the command execution
+     */
+    error?: Error;
 }
 
 /**
@@ -96,8 +181,7 @@ export interface ContainerCondition {
  * @see https://docs.docker.com/reference/api/engine/version/v1.48/#tag/System/operation/SystemEvents
  * @example
  * ```typescript
- * import { DockerWatch } from "@docker-watch/core";
- * import { parseConfig } from "@docker-watch/core";
+ * import { DockerWatch, parseConfig } from "@docker-watch/core";
  *
  * const config = await parseConfig("config.yml");
  * const watcher = new DockerWatch(config);

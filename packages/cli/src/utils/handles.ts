@@ -24,9 +24,7 @@ export async function handleWithOptions(options: OptionValues) {
         global_command: options.command,
     };
 
-    return new DockerWatch(config);
-}
+    logger.debug("Using generated config", config);
 
-export async function handleEvent(data: any) {
-    logger.debug(`Event: ${data}`);
+    return new DockerWatch(config);
 }

@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build && node lib/index.js",
-    "test": "npm run build && node lib/index.js -d -o \"start\" -C \"echo Hello World\"",
+    "test": "npm run build && node lib/index.js -d -o \"start\" -C \"sudo docker exec nginx nginx -s reload\"",
     "build": "tsc"
   },
   "dependencies": {
-    "commander": "^13.1.0"
+    "commander": "^13.1.0",
+    "@docker-watch/core": "^1.0.0"
   }
 }

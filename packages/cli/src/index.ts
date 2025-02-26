@@ -2,7 +2,7 @@ import { program } from "commander";
 import packageJson from "../package.json";
 import { DockerWatch, parseConfig } from "@docker-watch/core";
 import { logger } from "./utils";
-import { handleWithConfig, handleWithOptions, handleEvent } from "./utils";
+import { handleWithConfig, handleWithOptions } from "./utils";
 
 program.version(packageJson.version);
 
@@ -67,11 +67,30 @@ if (options.silent) {
             throw new Error("Docker-Watch is not defined");
         }
 
-        // Listen for events
-        dockerWatch.config.events.forEach((event) => {
-            logger.debug(`Adding listener for event ${event.name}`);
-            dockerWatch?.on(event.name, handleEvent);
-        });
+        dockerWatch.config.hooks = [
+            ...dockerWatch.config.hooks || [],
+            {
+                type: "before",
+                event: "start",
+                code: async (dockerWatch: DockerWatch, data: any) => {
+                    logger.info("Before start event");
+                    return;
+                }
+            },
+            {
+                type: "after",
+                event: "start",
+                code: async (dockerWatch, eventData, postRunData) => {
+                    logger.info("After start event");
+                    logger.debug("Post run data", postRunData);
+                    return;
+                }
+            }
+        ];
+
+        // Let the fun begin!
+        logger.debug("Listening for Docker events...");
+        await dockerWatch.initialize();
     } catch (err) {
         logger.error("Error while handling Docker-Watch", err);
         process.exit(1);
@@ -80,7 +99,7 @@ if (options.silent) {
     ["SIGINT", "SIGTERM"].forEach((signal) => {
         process.on(signal, () => {
             logger.info(`Received ${signal}, exiting...`);
-            // If possible, gracefully exit docker-watch
+            // If possible, gracefully exit docker-watch (will be added if needed and I find any graceful shutdown elements on dockerode)
             process.exit(0); // for now, just exit
         });
     });
