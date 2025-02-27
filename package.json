@@ -13,8 +13,7 @@
     "build:core": "yarn workspace @docker-watch/core build",
     "build:cli": "yarn workspace @docker-watch/cli build",
     "build:runner": "yarn workspace @docker-watch/runner build",
-    "format": "yarn workspaces run prettier --write \"src/**/*.ts\"",
-    "prepare": "husky"
+    "prepare": "husky && husky install"
   },
   "author": "Adam Billard <contact@classydev.fr>",
   "packageManager": "yarn@1.22.22",
@@ -26,7 +25,11 @@
   ],
   "devDependencies": {
     "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.5.2",
     "typescript": "^5.7.3"
+  },
+  "lint-staged": {
+    "*.{ts,md}": "prettier --write"
   }
 }
