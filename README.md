@@ -1,5 +1,3 @@
-<!-- This comment is here to prevent anything from considering this file as application/javascript -->
-
 # 👀 Docker-Watch
 
 docker-watch is a simple Node.js script to watch for container creation and deletion, and execute a command.
