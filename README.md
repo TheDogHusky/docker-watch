@@ -1,3 +1,5 @@
+<!-- This comment is here to prevent anything from considering this file as application/javascript -->
+
 # 👀 Docker-Watch
 
 docker-watch is a simple Node.js script to watch for container creation and deletion, and execute a command.
@@ -38,12 +40,12 @@ Or with docker-compose:
 
 ```yaml
 services:
-  docker-watch:
-    image: docker-watch/docker-watch:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /path/to/config.yml:/docker-watch.yml
-    restart: always
+    docker-watch:
+        image: docker-watch/docker-watch:latest
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /path/to/config.yml:/docker-watch.yml
+        restart: always
 ```
 
 ### Node.js
@@ -57,16 +59,17 @@ npm install @docker-watch/core
 And use it in your code:
 
 ```javascript
-const { DockerWatch, parseConfig } = require('@docker-watch/core');
+const { DockerWatch, parseConfig } = require("@docker-watch/core");
 
-const config = parseConfig('./config.yml');
+const config = parseConfig("./config.yml");
 const dockerWatch = new DockerWatch(config);
 
 // Your custom logic
-dockerWatch.on('start', (container) => {
-  console.log(`Container ${container.name} started`);
+dockerWatch.on("start", (container) => {
+    console.log(`Container ${container.name} started`);
 });
 ```
+
 ## Configuration
 
 The configuration file is a YAML file with the following structure:
@@ -74,20 +77,20 @@ The configuration file is a YAML file with the following structure:
 ```yaml
 global_command: "docker exec nginx nginx -s reload" # Command to execute on event, can be overridden by container-specific command
 conditions:
-  env: # Only execute the command if the container has the following environment variables
-    KEY: VALUE
-  container: # Only execute the command if the container has the following name
-    - name: "my_container"
-      value: "my_value"
-events:
-  - name: "start" # Event name
-    command: "docker exec nginx nginx -s reload" # Command to execute on event
-    conditions: # Conditions to execute the command
-      env: # Only execute the command if the container has the following environment variables
+    env: # Only execute the command if the container has the following environment variables
         KEY: VALUE
-      container:
-        - name: "my_container" # Only execute the command if the container has the following name
+    container: # Only execute the command if the container has the following name
+        - name: "my_container"
           value: "my_value"
+events:
+    - name: "start" # Event name
+      command: "docker exec nginx nginx -s reload" # Command to execute on event
+      conditions: # Conditions to execute the command
+          env: # Only execute the command if the container has the following environment variables
+              KEY: VALUE
+          container:
+              - name: "my_container" # Only execute the command if the container has the following name
+                value: "my_value"
 ```
 
 ## License
