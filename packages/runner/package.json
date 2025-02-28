@@ -10,6 +10,6 @@
     "author": "Adam Billard",
     "license": "MIT",
     "dependencies": {
-        "@docker-watch/cli": "^1.0.0"
+        "@docker-watch/core": "^1.0.0"
     }
 }
