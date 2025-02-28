@@ -42,7 +42,7 @@ services:
         image: docker-watch/docker-watch:latest
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            - /path/to/config.yml:/docker-watch.yml
+            - /path/to/config.yml:/app/docker-watch.yml
         restart: always
 ```
 
