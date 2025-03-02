@@ -1,0 +1,11 @@
+**/node_modules
+**/.yarn/cache
+**/.yarn/install-state.gz
+**/.husky
+**/.git
+**/.github
+**/.gitignore
+**/.prettierignore
+**/.prettierrc
+**/packages/cli
+**/docker
