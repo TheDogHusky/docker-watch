@@ -1,9 +1,8 @@
 name: Build and publish new release
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
 
 jobs:
   build-and-push-image:

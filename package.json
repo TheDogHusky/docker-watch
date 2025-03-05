@@ -1,6 +1,6 @@
 {
   "name": "docker-watch",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Watch for container changes and execute a command",
   "main": "index.js",
   "scripts": {
@@ -31,5 +31,8 @@
   },
   "lint-staged": {
     "*.{ts,md}": "prettier --write"
+  },
+  "dependencies": {
+    "lerna": "^8.2.1"
   }
 }
