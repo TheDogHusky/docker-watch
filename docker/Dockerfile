@@ -29,6 +29,4 @@ COPY --from=builder /app/packages/core/package.json ./packages/core/package.json
 COPY --from=builder /app/packages/core/node_modules ./packages/core/node_modules
 COPY --from=builder /app/node_modules ./node_modules
 
-RUN ls -la
-
 CMD ["node", "packages/runner/lib/index.js"]
