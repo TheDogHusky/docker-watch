@@ -5,6 +5,10 @@
   "main": "lib/index",
   "author": "Adam Billard",
   "license": "MIT",
+  "files": [
+    "lib",
+    "package.json"
+  ],
   "scripts": {
     "test": "tsc && node lib/index",
     "build": "tsc"

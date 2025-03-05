@@ -5,6 +5,10 @@
   "main": "lib/index",
   "author": "Adam Billard",
   "license": "MIT",
+  "files": [
+    "lib",
+    "package.json"
+  ],
   "scripts": {
     "start": "npm run build && node lib/index.js",
     "test": "npm run build && node lib/index.js -d -o \"start\" -C \"sudo docker exec nginx nginx -s reload\"",
