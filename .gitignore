@@ -3,3 +3,4 @@ lib
 .idea
 tsconfig.tsbuildinfo
 .husky/_
+lerna-debug.log
