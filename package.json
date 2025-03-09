@@ -13,6 +13,7 @@
     "build:core": "yarn workspace @docker-watch/core build",
     "build:cli": "yarn workspace @docker-watch/cli build",
     "build:runner": "yarn workspace @docker-watch/runner build",
+    "build:docker": "docker build -t docker-watch-runner -f $(pwd)/docker/Dockerfile .",
     "prepare": "husky"
   },
   "author": "Adam Billard <contact@classydev.fr>",

@@ -1,0 +1,6 @@
+# Config file to reload nginx on container start/stop
+# Assuming you run nginx in a docker container with name "nginx"
+global_command: "nsenter -t 1 -m -u -n -i sh -c \"docker exec nginx nginx -s reload\"" # This uses nsenter to run the command in the host namespace
+events:
+  - name: "start"
+  - name: "destroy"

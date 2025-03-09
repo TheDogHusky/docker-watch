@@ -19,6 +19,7 @@ const logger = getDefaultLogger();
 
     logger.info("Starting Docker-Watch Runner");
     logger.debug("Reading configuration file");
+
     // Parse the configuration file mounted in the container
     const parsedConfig = await parseConfig(
         join(process.cwd(), "docker-watch.yml"),
@@ -26,10 +27,12 @@ const logger = getDefaultLogger();
         logger.error("Error while parsing config file", err);
         process.exit(1);
     });
+
     logger.debug("Configuration file parsed successfully:", parsedConfig);
 
     // Initialize Docker-Watch
     logger.debug("Initializing Docker-Watch");
+
     const dockerWatch = new DockerWatch(parsedConfig);
     await dockerWatch.initialize().catch((err) => {
         logger.error("Error while initializing Docker-Watch", err);
