@@ -1,0 +1,46 @@
+name: Publish CLI on NPM
+
+on:
+  release:
+    types: [published]
+
+env:
+  HUSKY: 0
+
+jobs:
+  publish-on-npm:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Setup Yarn
+        run: |
+          corepack enable
+          yarn set version 1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build the packages
+        run: |
+          yarn workspace @docker-watch/core build
+          yarn workspace @docker-watch/cli build
+      - name: Publish updated packages
+        run: |
+          npx lerna publish from-package --yes
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,9 @@
+services:
+  docker-watch:
+    image: docker-watch/docker-watch:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config.yml:/app/docker-watch.yml
+    restart: always
+    pid: host
+    privileged: true

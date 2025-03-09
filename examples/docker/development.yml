@@ -1,0 +1,11 @@
+services:
+  docker-watch:
+    image: docker-watch-runner:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./configs/nginx-reload.yml:/app/docker-watch.yml
+    restart: always
+    pid: host
+    privileged: true # Required to allow docker-watch to run docker commands, and commands on the host machine
+    environment:
+      - DEBUG=1

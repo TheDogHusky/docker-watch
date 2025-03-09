@@ -1,18 +1,39 @@
 {
-    "name": "docker-watch",
-    "version": "0.1.0",
-    "description": "Watch for container changes and execute a command",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js"
-    },
-    "author": {
-        "name": "Adam Billard",
-        "email": "contact@classydev.fr"
-    },
-    "dependencies": {
-        "dockerode": "^4.0.4"
-    },
-    "packageManager": "yarn@1.22.22"
+  "name": "docker-watch",
+  "version": "1.0.0",
+  "description": "Watch for container changes and execute a command",
+  "main": "index.js",
+  "scripts": {
+    "start:cli": "yarn workspace @docker-watch/cli start",
+    "test": "yarn workspaces run test",
+    "test:core": "yarn workspace @docker-watch/core test",
+    "test:cli": "yarn workspace @docker-watch/cli test",
+    "test:runner": "yarn workspace @docker-watch/runner test",
+    "build": "yarn build:core && yarn build:cli && yarn build:runner",
+    "build:core": "yarn workspace @docker-watch/core build",
+    "build:cli": "yarn workspace @docker-watch/cli build",
+    "build:runner": "yarn workspace @docker-watch/runner build",
+    "build:docker": "docker build -t docker-watch-runner -f $(pwd)/docker/Dockerfile .",
+    "prepare": "husky"
+  },
+  "author": "Adam Billard <contact@classydev.fr>",
+  "packageManager": "yarn@1.22.22",
+  "repository": "https://github.com/TheDogHusky/docker-watch.git",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.2",
+    "typescript": "^5.7.3"
+  },
+  "lint-staged": {
+    "*.{ts,md}": "prettier --write"
+  },
+  "dependencies": {
+    "lerna": "^8.2.1"
+  }
 }

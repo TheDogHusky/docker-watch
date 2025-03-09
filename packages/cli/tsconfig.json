@@ -1,0 +1,25 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "baseUrl": ".",
+        "outDir": "lib",
+        "composite": true,
+        "paths": {
+            "@docker-watch/core": [
+                "../core/src/index.ts"
+            ]
+        }
+    },
+    "include": [
+        "src",
+        "package.json"
+    ],
+    "exclude": [
+        "lib",
+        "node_modules"
+    ],
+    "references": [
+        { "path": "../core" }
+    ]
+}

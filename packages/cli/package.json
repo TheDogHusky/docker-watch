@@ -1,0 +1,21 @@
+{
+  "name": "@docker-watch/cli",
+  "version": "1.0.0",
+  "description": "CLI for docker-watch",
+  "main": "lib/index",
+  "author": "Adam Billard",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "package.json"
+  ],
+  "scripts": {
+    "start": "node lib/index.js",
+    "test": "npm run build && node lib/index.js -d -o \"start\" -C \"sudo docker exec nginx nginx -s reload\"",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@docker-watch/core": "^1.0.0",
+    "commander": "^13.1.0"
+  }
+}

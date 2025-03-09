@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "declaration": true,
+        "rootDir": ".",
+        "outDir": "lib",
+        "baseUrl": ".",
+        "strict": true,
+        "module": "commonjs",
+        "target": "esnext",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "paths": {
+            "@docker-watch/*": [
+                "packages/*/src/index.ts"
+            ]
+        }
+    },
+    "include": [],
+    "references": [
+        { "path": "./packages/core" },
+        { "path": "./packages/cli" },
+        { "path": "./packages/runner" }
+    ]
+}
