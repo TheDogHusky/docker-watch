@@ -1,0 +1,6 @@
+# Config file to reload nginx on container start/stop
+# Assuming you run nginx in a docker container with name "nginx"
+global_command: "docker exec nginx nginx -s reload"
+events:
+  - name: "start"
+  - name: "destroy"

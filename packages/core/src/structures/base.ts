@@ -2,6 +2,8 @@ import Docker from "dockerode";
 import { Config, Events } from "../types";
 import EventEmitter from "node:events";
 import TypedEmitter from "typed-emitter";
+import { ConsolaInstance } from "consola";
+import { getDefaultLogger } from "./logger";
 
 /**
  * The Docker Watcher Base
@@ -22,10 +24,12 @@ import TypedEmitter from "typed-emitter";
 export default class DockerWatchBase extends (EventEmitter as new () => TypedEmitter<Events>) {
     public docker: Docker;
     public config: Config;
+    protected logger: ConsolaInstance;
 
-    constructor(config: Config) {
+    constructor(config: Config, logger?: ConsolaInstance) {
         super();
         this.config = config;
+        this.logger = logger || getDefaultLogger();
         // Create a new Docker instance
         this.docker = new Docker({
             socketPath: config.socket_path || "/var/run/docker.sock",

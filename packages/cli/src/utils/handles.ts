@@ -7,7 +7,7 @@ import { logger } from "./constants";
  * @param config
  */
 export async function handleWithConfig(config: Promise<Config>) {
-    return new DockerWatch(await config);
+    return new DockerWatch(await config, logger);
 }
 
 /**
@@ -26,5 +26,5 @@ export async function handleWithOptions(options: OptionValues) {
 
     logger.debug("Using generated config", config);
 
-    return new DockerWatch(config);
+    return new DockerWatch(config, logger);
 }

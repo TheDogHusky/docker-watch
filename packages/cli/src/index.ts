@@ -3,6 +3,8 @@ import packageJson from "../package.json";
 import { DockerWatch, parseConfig } from "@docker-watch/core";
 import { logger } from "./utils";
 import { handleWithConfig, handleWithOptions } from "./utils";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 
 program.version(packageJson.version);
 
@@ -56,7 +58,17 @@ if (options.silent) {
         // If the config flag is set, use that config file
         if (options.config) {
             logger.debug("Using config file", options.config);
-            const config = parseConfig(options.config);
+            // how to revolve the path from the place where the process has been started
+            const relativePath = resolve(process.cwd(), options.config);
+            logger.debug("Relative path", relativePath);
+            if (!existsSync(relativePath)) {
+                logger.error(
+                    "Config file does not exist: ",
+                    resolve(relativePath),
+                );
+                process.exit(1);
+            }
+            const config = parseConfig(relativePath);
             dockerWatch = await handleWithConfig(config);
         } else {
             logger.debug("Using options", options);
@@ -68,8 +80,12 @@ if (options.silent) {
         }
 
         // Let the fun begin!
-        logger.debug("Listening for Docker events...");
+        logger.info("Listening for Docker events...");
         await dockerWatch.initialize();
+
+        dockerWatch.on("error", (err) => {
+            logger.error("Error from Docker-Watch", err.stack);
+        });
     } catch (err) {
         logger.error("Error while handling Docker-Watch", err);
         process.exit(1);

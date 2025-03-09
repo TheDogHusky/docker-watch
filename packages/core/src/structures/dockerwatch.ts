@@ -1,6 +1,7 @@
 import DockerWatchBase from "./base";
 import { Config, Hook } from "../types";
 import { execute } from "../utils/functions";
+import { ConsolaInstance } from "consola";
 
 /**
  * The Docker Watcher
@@ -21,8 +22,8 @@ import { execute } from "../utils/functions";
  * ```
  */
 export default class DockerWatch extends DockerWatchBase {
-    constructor(config: Config) {
-        super(config);
+    constructor(config: Config, logger?: ConsolaInstance) {
+        super(config, logger);
     }
 
     /**
@@ -38,6 +39,7 @@ export default class DockerWatch extends DockerWatchBase {
      */
     public async initialize() {
         this.config.events.forEach((event) => {
+            this.logger.verbose(`Listening for ${event.name} events`);
             // Get the hooks for this event
             const hooks = this.config.hooks?.filter(
                 (hook) => hook.event === event.name,
@@ -50,14 +52,23 @@ export default class DockerWatch extends DockerWatchBase {
                 (hook): hook is Hook<"after"> => hook.type === "after",
             );
 
+            this.logger.verbose(
+                `Found ${preHooks?.length || 0} pre-hooks and ${postHooks?.length || 0} pre-hooks for ${event.name}`,
+            );
+
             // Listen for the event
             this.on(event.name, async (data) => {
+                this.logger.debug(`Event ${event.name} received`);
+                this.logger.verbose(data);
                 // Run the pre-hooks
                 if (preHooks) {
                     for (const hook of preHooks) {
                         await hook
                             .code(this, data)
                             .catch((e: Error) => this.emit("error", e));
+                        this.logger.verbose(
+                            `Pre-hook executed for event ${event.name}`,
+                        );
                     }
                 }
 
@@ -73,12 +84,18 @@ export default class DockerWatch extends DockerWatchBase {
                     return { stdout: "", stderr: "" };
                 });
 
+                this.logger.debug("Output", result);
+                this.logger.verbose(`Command executed for event ${event.name}`);
+
                 // Run the post-hooks
                 if (postHooks) {
                     for (const hook of postHooks) {
                         await hook
                             .code(this, data, result)
                             .catch((e: Error) => this.emit("error", e));
+                        this.logger.verbose(
+                            `Post-hook executed for event ${event.name}`,
+                        );
                     }
                 }
             });
