@@ -1,13 +1,13 @@
 # 👀 Docker-Watch
 
-docker-watch is a simple Node.js script to watch for container creation and deletion, and execute a command.
+docker-watch is a simple Node.js script to watch for docker events, and execute a command.
 
 It is available as a CLI, docker image, and Node.js module.
 
 ## Features
 
-- 👀 Watch for container creation and deletion
-- ⚡ Execute a command when a container is created or deleted
+- 👀 Watch any docker events available in the Docker API
+- ⚡ Execute a command accordingly
 - 🎨 Customizable
 - 🦾 Crash-free (I hope, had no crashes so far)
 - 💡 Simple to use
