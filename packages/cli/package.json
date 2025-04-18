@@ -15,7 +15,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@docker-watch/core": "^1.1.1",
+    "@docker-watch/core": "^1.0.0",
     "commander": "^13.1.0"
   }
 }
