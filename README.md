@@ -4,6 +4,8 @@ docker-watch is a simple Node.js script to watch for docker events, and execute 
 
 It is available as a CLI, docker image, and Node.js module.
 
+> Warning! I need to roll out an update containing the correct shebang for nodejs on the cli. Until then, the cli is probably unusable. Sorry for the incovenience caused.
+
 ## Features
 
 - 👀 Watch any docker events available in the Docker API
