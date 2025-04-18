@@ -25,7 +25,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install && npm i -g npm@latest
 
       - name: Setup Yarn
         run: |
@@ -42,7 +42,7 @@ jobs:
       - name: Authenticate with Registry
         run: |
           yarn logout
-          echo "registry=http://registry.npmjs.org/" >> .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           npm whoami
         env:
