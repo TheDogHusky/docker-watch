@@ -24,16 +24,13 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install dependencies
-        run: yarn install && npm i -g npm@latest
-
       - name: Setup Yarn
         run: |
           corepack enable
           yarn set version 1.22.22
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install && npm i -g npm@latest
 
       - name: Build the packages
         run: |

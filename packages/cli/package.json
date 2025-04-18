@@ -5,6 +5,9 @@
   "main": "lib/index",
   "author": "Adam Billard",
   "license": "MIT",
+  "bin": {
+    "docker-watch": "lib/index.js"
+  },
   "files": [
     "lib",
     "package.json"
