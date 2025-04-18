@@ -16,6 +16,7 @@ COPY package.json yarn.lock tsconfig.json ./
 COPY packages/runner ./packages/runner
 COPY packages/core ./packages/core
 RUN yarn
+RUN yarn workspace @docker-watch/core run build
 RUN yarn workspace @docker-watch/runner run build
 RUN ls -la
 RUN ls -la packages/runner
