@@ -1,10 +1,13 @@
 {
   "name": "@docker-watch/cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CLI for docker-watch",
   "main": "lib/index",
   "author": "Adam Billard",
   "license": "MIT",
+  "bin": {
+    "docker-watch": "lib/index.js"
+  },
   "files": [
     "lib",
     "package.json"
@@ -15,7 +18,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@docker-watch/core": "^1.0.0",
+    "@docker-watch/core": "^1.0.1",
     "commander": "^13.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
