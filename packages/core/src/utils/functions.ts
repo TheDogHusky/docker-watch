@@ -13,7 +13,7 @@ export async function parseConfig(path: string): Promise<Config> {
 }
 
 /**
- * Safely executes a command
+ * Safely executes a command, handling errors and returning the output
  * @param command The command to execute
  * @returns The stdout and stderr from the command, alongside an error if there is one
  */
