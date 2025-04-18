@@ -1,6 +1,6 @@
 {
   "name": "@docker-watch/core",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Core logic for docker-watch",
   "main": "lib/index",
   "author": "Adam Billard",
