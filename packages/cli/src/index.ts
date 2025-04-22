@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { program } from "commander";
 import packageJson from "../package.json";
 import { DockerWatch, parseConfig } from "@docker-watch/core";
