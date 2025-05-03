@@ -70,10 +70,10 @@ npm install @docker-watch/core
 And use it in your code:
 
 ```javascript
-const { DockerWatch, parseConfig } = require("@docker-watch/core");
+const { DockerWatchBase, parseConfig } = require("@docker-watch/core");
 
 const config = parseConfig("./config.yml");
-const dockerWatch = new DockerWatch(config);
+const dockerWatch = new DockerWatchBase(config);
 
 // Your custom logic
 dockerWatch.on("start", (container) => {
