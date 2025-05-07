@@ -31,7 +31,7 @@ docker-watch --config ./config.yml
 ### Docker
 
 ```bash
-docker run -d --name docker-watch --pid=host --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /path/to/config.yml:/docker-watch.yml docker-watch/docker-watch:latest
+docker run -d --name docker-watch --pid=host --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /path/to/config.yml:/docker-watch.yml classycraft3r/docker-watch:latest
 ```
 
 Or with docker-compose:
@@ -39,7 +39,7 @@ Or with docker-compose:
 ```yaml
 services:
     docker-watch:
-        image: docker-watch/docker-watch:latest
+        image: classycraft3r/docker-watch:latest
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /path/to/config.yml:/app/docker-watch.yml
